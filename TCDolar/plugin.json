@@ -1,0 +1,12 @@
+{
+  "ID": "216ae4b90b0c4ad4bcbbfa988bafb9bc", //Plugin ID，32 bit UUID
+  "ActionKeyword": "tc", //Plugin default action keyword
+  "Name": "Wox.Plugin.TCConverter", //Plugin name
+  "Description": "Simple tc converter to Costa Rica", //Plugin description
+  "Author": "Jasón Mongrillo", //Plugin Author
+  "Version": "1.0.0", //Plugin version，must be x.x.x format
+  "Language": "csharp", //Plugin language，we support csharp,python and executable now
+  "Website": "https://www.jmongrio.com", //Plugin website or author website
+  "IcoPath": "Images\\dolar.png", //Plugin icon, relative path to the pluign folder
+  "ExecuteFileName": "TCDolar.dll" //Execution entry. Dll name for c# plugin, and python file for python plugin
+}
