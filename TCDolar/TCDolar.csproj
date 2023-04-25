@@ -59,7 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="compra.png" />
+    <Content Include="cr.png" />
     <Content Include="Images\dolar.png" />
+    <Content Include="usd.png" />
     <Content Include="venta.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

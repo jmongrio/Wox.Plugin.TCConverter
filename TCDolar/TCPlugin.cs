@@ -18,14 +18,31 @@ namespace TCDolar
         public void Init(PluginInitContext context) { }
         public List<Result> Query(Query query)
         {
-            if (tc == null)
+            if (tc != null)
             {
-                return new List<Result>()
+                GetTC();
+                double amount = double.Parse(query.Search);
+                double cr = tc.venta * amount;
+                double usd = amount / tc.venta;
+
+                return new List<Result>
                 {
                     new Result
                     {
-                        Title = "Error",
-                        SubTitle = "Error al cargar datos",
+                        Title = "USD to CR",
+                        SubTitle = $"¢{cr}",
+                        IcoPath = "cr.png",
+                        Action = _ =>
+                        {
+                            return true;
+                        }
+                    },
+
+                    new Result
+                    {
+                        Title = "CR to USD",
+                        SubTitle = $"${usd}",
+                        IcoPath = "usd.png",
                         Action = _ =>
                         {
                             return true;
@@ -35,29 +52,12 @@ namespace TCDolar
             }
             else
             {
-                GetTC();
-                double amount = double.Parse(query.Search);
-                double compra = tc.compra * amount;
-                double venta = tc.venta * amount;
-
-                return new List<Result>
+                return new List<Result>()
                 {
                     new Result
                     {
-                        Title = "Compra",
-                        SubTitle = $"{query.Search} * {tc.compra} = {compra}",
-                        IcoPath = "compra.png",
-                        Action = _ =>
-                        {
-                            return true;
-                        }
-                    },
-
-                    new Result
-                    {
-                        Title = "Venta",
-                        SubTitle = $"{query.Search} * {tc.venta} = {venta}",
-                        IcoPath = "venta.png",
+                        Title = "Error",
+                        SubTitle = "Error al cargar datos.",
                         Action = _ =>
                         {
                             return true;
