@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -25,12 +26,15 @@ namespace TCDolar
                 double cr = tc.venta * amount;
                 double usd = amount / tc.venta;
 
+                CultureInfo usdCurrency = new CultureInfo("en-us");
+                CultureInfo crCurrency = new CultureInfo("es-cr");
+
                 return new List<Result>
                 {
                     new Result
                     {
                         Title = "USD to CR",
-                        SubTitle = $"¢{cr}",
+                        SubTitle = $"{cr.ToString("C", crCurrency)}",
                         IcoPath = "cr.png",
                         Action = _ =>
                         {
@@ -41,7 +45,7 @@ namespace TCDolar
                     new Result
                     {
                         Title = "CR to USD",
-                        SubTitle = $"${usd}",
+                        SubTitle = $"{usd.ToString("C", usdCurrency)}",
                         IcoPath = "usd.png",
                         Action = _ =>
                         {
