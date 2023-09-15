@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using TCDolar.Model;
+using webScrapping;
 using Wox.Plugin;
 
 namespace TCDolar
@@ -14,14 +16,13 @@ namespace TCDolar
     public class TCPlugin : IPlugin
     {
         TC tc = new TC();
-        API api = new API();
 
         public void Init(PluginInitContext context) { }
         public List<Result> Query(Query query)
         {
-            if (tc != null)
+            if (tc != null && tc.venta != 0)
             {
-                GetTC();
+                tc.venta = GetTC();
                 double amount = double.Parse(query.Search);
                 double cr = tc.venta * amount;
                 double usd = amount / tc.venta;
@@ -71,17 +72,16 @@ namespace TCDolar
             }
         }
 
-        public async void GetTC()
+        public double GetTC()
         {
-            string url = api.URL();
+            string url = $"https://www.bccr.fi.cr/SitePages/Inicio.aspx";
 
-            HttpClient client = api.APIInit();
-            HttpResponseMessage response = await client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-                tc = JsonConvert.DeserializeObject<TC>(result);
-            }
+            var response = webScrap.CallUrl(url).Result;
+            string tcDolarString = webScrap.ParseHtml(response);
+
+            double tcDolar = double.Parse(tcDolarString);
+
+            return tcDolar;
         }
     }
 }
