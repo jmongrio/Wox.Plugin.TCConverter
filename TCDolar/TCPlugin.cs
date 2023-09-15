@@ -1,12 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using TCDolar.Model;
 using webScrapping;
 using Wox.Plugin;
@@ -15,17 +8,17 @@ namespace TCDolar
 {
     public class TCPlugin : IPlugin
     {
-        TC tc = new TC();
-
         public void Init(PluginInitContext context) { }
         public List<Result> Query(Query query)
         {
-            if (tc != null && tc.venta != 0)
+            ExchangeRate exchangeRate = new ExchangeRate();
+
+            if (exchangeRate != null && exchangeRate.Venta != 0)
             {
-                tc.venta = GetTC();
+                exchangeRate.Venta = GetTC();
                 double amount = double.Parse(query.Search);
-                double cr = tc.venta * amount;
-                double usd = amount / tc.venta;
+                double cr = exchangeRate.Venta * amount;
+                double usd = amount / exchangeRate.Venta;
 
                 CultureInfo usdCurrency = new CultureInfo("en-us");
                 CultureInfo crCurrency = new CultureInfo("es-cr");
@@ -76,8 +69,8 @@ namespace TCDolar
         {
             string url = $"https://www.bccr.fi.cr/SitePages/Inicio.aspx";
 
-            var response = webScrap.CallUrl(url).Result;
-            string tcDolarString = webScrap.ParseHtml(response);
+            var response = WebScrap.CallUrl(url).Result;
+            string tcDolarString = WebScrap.ParseHtml(response);
 
             double tcDolar = double.Parse(tcDolarString);
 

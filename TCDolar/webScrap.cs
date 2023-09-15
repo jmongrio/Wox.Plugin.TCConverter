@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace webScrapping
 {
-    internal class webScrap
+    internal class WebScrap
     {
         public static async Task<string> CallUrl(string url)
         {
@@ -20,7 +20,6 @@ namespace webScrapping
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
 
-            //var section = htmlDoc.DocumentNode.Descendants("label").Where(node => !node.GetAttributeValue("id", "").Contains("D318")).FirstOrDefault();
             var section = htmlDoc.DocumentNode.Descendants("label").Where(node => !node.Id.Contains("D317")).FirstOrDefault(); ;
 
             if (section == null)
@@ -28,7 +27,7 @@ namespace webScrapping
                 Console.WriteLine("Sección nula");
                 return string.Empty;
             }
-            //string tcDolar = "test";
+
             string tcDolar = section.InnerHtml;
             return tcDolar;
         }
