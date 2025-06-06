@@ -9,8 +9,7 @@ El Plugin de Wox TCConverter es una herramienta simple pero útil para realizar 
 
 ## Capturas de Pantalla
 
-![Captura de Pantalla 1](/screenshots/screenshot1.png)
-![Captura de Pantalla 2](/screenshots/screenshot2.png)
+(![Screenshot 2025-06-05 202118](https://github.com/user-attachments/assets/25998407-8df1-4d36-a622-ca84c2bbe23e))
 
 ## Características
 
