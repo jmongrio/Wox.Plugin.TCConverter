@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using TCDolar.Model;
-using webScrapping;
 using Wox.Plugin;
 
 namespace TCDolar
@@ -63,18 +62,6 @@ namespace TCDolar
                     }
                 };
             }
-        }
-
-        public double GetTC()
-        {
-            string url = $"https://www.bccr.fi.cr/SitePages/Inicio.aspx";
-
-            var response = WebScrap.CallUrl(url).Result;
-            string tcDolarString = WebScrap.ParseHtml(response);
-
-            double tcDolar = double.Parse(tcDolarString);
-
-            return tcDolar;
         }
     }
 }

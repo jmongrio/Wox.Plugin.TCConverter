@@ -2,6 +2,6 @@
 {
     public class ExchangeRate
     {
-        public double Venta { get; set; }
+        public double Venta { get; set; } = 511.84;
     }
 }
