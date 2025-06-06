@@ -14,7 +14,6 @@ namespace TCDolar
 
             if (exchangeRate != null && exchangeRate.Venta != 0)
             {
-                exchangeRate.Venta = GetTC();
                 double amount = double.Parse(query.Search);
                 double cr = exchangeRate.Venta * amount;
                 double usd = amount / exchangeRate.Venta;
